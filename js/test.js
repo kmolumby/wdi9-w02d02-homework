@@ -1,136 +1,175 @@
+game = {
+    deck: [
+        {
+          name: "Bulbasaur",
+          damage: 60
+        }, {
+          name: "Caterpie",
+          damage: 40
+        }, {
+          name: "Charmander",
+          damage: 60
+        }, {
+          name: "Clefairy",
+          damage: 50
+        }, {
+          name: "Jigglypuff",
+          damage: 60
+        }, {
+          name: "Mankey",
+          damage: 30
+        }, {
+          name: "Meowth",
+          damage: 60
+        }, {
+          name: "Nidoran - female",
+          damage: 60
+        }, {
+          name: "Nidoran - male",
+          damage: 50
+        }, {
+          name: "Oddish",
+          damage: 40
+        }, {
+          name: "Pidgey",
+          damage: 50
+        }, {
+          name: "Pikachu",
+          damage: 50
+        }, {
+          name: "Poliwag",
+          damage: 50
+        }, {
+          name: "Psyduck",
+          damage: 60
+        }, {
+          name: "Rattata",
+          damage: 30
+        }, {
+          name: "Squirtle",
+          damage: 60
+        }, {
+          name: "Vulpix",
+          damage: 50
+        }, {
+          name: "Weedle", 
+          damage: 40
+        }
+      ],
+    player: {
+        name: "Ash",
+        hand: [],
+        points: 0,
+        roundsWon: 0,
+    },
+    computer: {
+        name: "Gary",
+        hand: [],
+        points: 0,
+        roundsWon: 0,
+    },
 
-// const game = [
-    
+     
+    dealACard(player){
+        console.log(`Dealing to ${player.name}`)
+        let randomCard = Math.floor(Math.random() * this.deck.length);
+        let cardDealt = this.deck.splice(randomCard, 1)[0];
+        player.hand.push(cardDealt);
+        // $('#player-hand').append(`<p>${player.hand[i]}</p>`)
 
-
-//     console.log(deck);
-    
-//     cardsInPlay: [],
-// 	computerPoints: 0,
-// 	playerPoints: 0,
-// 	currentRound: 1,
-// 	playerRounds: 0,
-// 	roundsWonByComputer: 0,
-//     computerHand: [],
-//     playerHand: [],
-
-    
-//     deal () {
-      
-//         let randomCard = Math.floor(Math.random()*this.deck.length);
-//         console.log(randomCard)
-//     }
-
-// ]
-//         let cardDealt = this.deck.splice(randomCard,1);
-//         return cardDealt;
-// console.log(cardDealt);  
-//     console.log()
-
-
-//     dealCards () {
-//         for (let i = 0; i < 3; i++) {
-//             let playerCard = this.deal();
-//             let computerCard = this.deal;
-//             this.playerHand.push(playerCard);
-//             this.computerHand.push(computerCard);
-//             this.cardsInPlay.push(playerCard, computerCard);
-//             console.log(`These are the cards in play ${this.cardsInPlay}`);
-//         }
-// //      }
-
-//     // };
-//     }
-
-  
-
-       const game = {
-           
-        deck : [
-                {name: "Bulbasaur", damage: 60}, 
-                {name: "Caterpie", damage: 40}, 
-                {name: "Charmander", damage: 60}, 
-                {name: "Clefairy", damage: 50}, 
-                {name: "Jigglypuff", damage: 60}, 
-                {name: "Mankey", damage: 30}, 
-                {name: "Meowth",damage: 60}, 
-                {name: "Nidoran - female", damage: 60}, 
-                {name: "Nidoran - male", damage: 50}, 
-                {name: "Oddish", damage: 40}, 
-                {name: "Pidgey", damage: 50}, 
-                {name: "Pikachu", damage: 50}, 
-                {name: "Poliwag", damage: 50}, 
-                {name: "Psyduck", damage: 60}, 
-                {name: "Rattata", damage: 30}, 
-                {name: "Squirtle",damage: 60}, 
-                {name: "Vulpix", damage: 50},
-                {name: "Weedle", damage: 40}
-            ],
-
-
-            //place holders for keys that will be used in functions
-           
-            cardsInPlay: [],
-            computerPoints: 0,
-            playerPoints: 0,
-            currentRound: 1,
-            playerRounds: 0,
-            roundsWonByComputer: 0,
-            computerHand: [],
-            playerHand: [],
-
-            // initial deal function that generates a random card
-            dealRandomCard () {
-      
-                    let randomCard = Math.floor(Math.random()*this.deck.length);
-                    let cardDealt = this.deck.splice(randomCard,1);
-                    return cardDealt;
-                    },
+        // $('#player-hand').append(`<p>Player has ${this.player.hand[i].name}`)
 
             
-            // Deals 3 cards to each player and puts it into a player hand array
+    },
 
-            dealCards () {
-            for (let i = 0; i < 3; i++) {
-                let playerCard = this.dealRandomCard();
-                let computerCard = this.dealRandomCard();
-                this.playerHand.push(playerCard);
-                
-                this.computerHand.push(computerCard);
-                this.cardsInPlay.push(playerCard, computerCard);
-                console.log(this.cardsInPlay)
-                console.log(`Player has ${this.playerHand}) and computer has ${this.computerHand}`);
-            } 
-        },      
-        
-        // how actual game play happens in the round
-      roundGamePlay () {
-            let playerCard = this.playerHand.splice(0,1);
-            let computerCard = this.computerHand.splice(0,1);
-            console.log(playerCard);
-            if (playerCard.damage > computerCard.damage) {
-                this.playerPoints++;
-            } else if (playerCard.damage < computerCard.damage) {
-                this.computerPoints++;
-               
-            }
-         },
-
-            playRound() {
-            this.dealCards();
-            this.roundGamePlay();
-            this.roundGamePlay();
-            this.roundGamePlay();
-    
-        },
-
-
-      playGame () {
-        while ( this.deck.length > 5) {
-            this.playRound();
+    round () {
+       
+        for(let i = 0; i < 3; i++){
+            this.dealACard(game.player);
+            this.dealACard(game.computer);
         }
-      }
-    }
+        $('#player-hand').append(`<p>${this.player.hand[0].name}</p>`)
+        $('#player-hand').append(`<p>${this.player.hand[1].name}</p>`)
+        $('#player-hand').append(`<p>${this.player.hand[2].name}</p>`)
+
+    },
+
+   
+
+
+    battle () {
+        let playerCard = this.player.hand.pop();
+        let computerCard = this.computer.hand.pop();
+        $('#player-hand').append(`<p>Player played ${playerCard.name}`)
+        $('#computer-hand').append(`<p>Computer played ${computerCard.name}`)
+
+
+        console.log(`${this.computer.name} played ${computerCard.name} which deals ${computerCard.damage} pts`);
+        if(playerCard.damage > computerCard.damage){
+            this.player.points ++
+            console.log(`${this.player.name} won this battle`);
+        } else if(playerCard.damage === computerCard.damage){
+            console.log("Tie Game");
+        } else {
+            this.computer.points ++
+            console.log(`${this.computer.name} won this battle`);
+        }
+
+        this.roundsWon();
+    },
+    roundsWon() {
+            console.log(`Score: ${this.player.name}: ${this.player.points}, ${this.computer.name}: ${this.computer.points}`);
+    },
+}
+
+const playRound = () => {
+    console.log('working')
+
+
+    game.round();
+    game.battle();
+
+    $('#score').append(`Score: ${game.player.name}: ${game.player.points}, ${game.computer.name}: ${game.computer.points}`)
+
+}
+$('.start-game').on('click', () => {
+    $('.start-game').remove()
+   
+      playRound();
+      $('#game-display').append('<button id= new-round>Start Next Round</button>')
+      $('#new-round').click(playRound)
+      
+    })
     
-    game.playGame();
+       
+    
+  
+
+
+
+$('#new-round').click(playRound);
+
+// $('#new-round').on('click', () => {
+//             $('#hands').remove()
+//             $('#new-round').remove()
+
+//         game.round();
+//         game.battle();
+//         $('#hands').append(`<p>${this.player.hand[0].name}</p>`)
+//         $('#hands').append(`<p>${this.player.hand[1].name}</p>`)
+//         $('#hands').append(`<p>${this.player.hand[2].name}</p>`)
+
+//         $('#hands').append(`<p>Player played ${playerCard.name}`)
+//         $('#hands').append(`<p>Computer played ${computerCard.name}`)
+
+//         $('#score').append(`Score: ${game.player.name}: ${game.player.points}, ${game.computer.name}: ${game.computer.points}`)
+//         $('#game-display').append('<button id= new-round>Start Next Round</button>')
+//         })
+
+
+
+
+
+
+
 
